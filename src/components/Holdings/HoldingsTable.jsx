@@ -125,7 +125,7 @@ export default function HoldingsTable() {
               </th>
               <th className="col-holdings">
                 Holdings
-                <span className="th-sub">Avg Buy Price</span>
+                <span className="th-sub">Current Market Rate</span>
               </th>
               <th className="col-price">Current Price</th>
               <th className="col-value">
