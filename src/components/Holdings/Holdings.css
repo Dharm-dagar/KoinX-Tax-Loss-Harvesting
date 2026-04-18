@@ -203,9 +203,8 @@
   text-align: left;
   width: auto;
 }
-
-
-.holdings-table .col-holdings {
+.holdings-table th.col-holdings,
+.holdings-table td.col-holdings {
   text-align: right;
 }
 .th-sub {
