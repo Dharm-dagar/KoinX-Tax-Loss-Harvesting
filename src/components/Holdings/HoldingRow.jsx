@@ -26,11 +26,11 @@ function CoinLogo({ src, alt }) {
   );
 }
 
-function GainCell({ gain, balance, label }) {
+function GainCell({ gain, balance, label, symbol }) {
   const { text, cls } = formatGain(gain);
   const balanceFormatted = balance
-    ? balance.toLocaleString('en-IN', { maximumSignificantDigits: 6 })
-    : '0';
+    ? `${balance.toLocaleString('en-IN', { maximumSignificantDigits: 6 })} ${symbol}`
+    : `0 ${symbol}`;
 
   return (
     <div className="gain-cell">
@@ -107,7 +107,7 @@ export default function HoldingRow({ holding, rowKey, checked, onToggle }) {
             </span>
           </Tooltip>
           <span className="holdings-cell__avg">
-            Avg: {formatPrice(holding.averageBuyPrice)}
+            Rate: {formatPrice(holding.currentPrice)} / {holding.coin}
           </span>
         </div>
       </td>
@@ -132,6 +132,7 @@ export default function HoldingRow({ holding, rowKey, checked, onToggle }) {
         <GainCell
           gain={holding.stcg.gain}
           balance={holding.stcg.balance}
+          symbol={holding.coin}
           label="ST Gain"
         />
       </td>
@@ -141,6 +142,7 @@ export default function HoldingRow({ holding, rowKey, checked, onToggle }) {
         <GainCell
           gain={holding.ltcg.gain}
           balance={holding.ltcg.balance}
+          symbol={holding.coin}
           label="LT Gain"
         />
       </td>
