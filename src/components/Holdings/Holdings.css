@@ -192,8 +192,7 @@
   line-height: 1.4;
 }
 .holdings-table th:first-child,
-.holdings-table th:nth-child(2),
-.holdings-table th.col-holdings {
+.holdings-table th:nth-child(2) {
   text-align: left;
 }
 .holdings-table th .sort-btn {
@@ -205,6 +204,10 @@
   width: auto;
 }
 
+
+.holdings-table .col-holdings {
+  text-align: right;
+}
 .th-sub {
   display: block;
   font-size: 10px;
