@@ -5,6 +5,33 @@ const DELAY_MS = 800;
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
+function randomBetween(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function randomGainForHolding(holding) {
+  const value = holding.currentPrice * holding.totalHolding;
+  const scale = Math.max(5, value * 0.35, 1);
+  const gain = parseFloat(randomBetween(-scale, scale).toFixed(2));
+  const balance = Math.min(
+    holding.totalHolding,
+    Math.abs(gain) / Math.max(holding.currentPrice, 0.000001)
+  );
+  return { gain, balance };
+}
+
+function randomizeHoldings(holdings) {
+  return holdings.map((holding) => {
+    const stcg = randomGainForHolding(holding);
+    const ltcg = randomGainForHolding(holding);
+    return {
+      ...holding,
+      stcg,
+      ltcg,
+    };
+  });
+}
+
 // ─── Holdings Data ────────────────────────────────────────────────────────────
 
 const HOLDINGS_DATA = [
@@ -429,7 +456,7 @@ export async function fetchHoldings() {
   await delay(DELAY_MS);
   // Uncomment to test error state:
   // throw new Error('Failed to fetch holdings');
-  return [...HOLDINGS_DATA];
+  return randomizeHoldings(HOLDINGS_DATA);
 }
 
 /**
