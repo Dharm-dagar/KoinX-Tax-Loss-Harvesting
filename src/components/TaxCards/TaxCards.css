@@ -1,0 +1,201 @@
+/* ─── Base Card ───────────────────────────────────────────────────────────── */
+.tax-card {
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: card-in 0.4s ease both;
+}
+.tax-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Pre-Harvest Card (white/dark surface) ───────────────────────────────── */
+.tax-card--pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.tax-card--pre .stat-header__col { color: var(--text-muted); }
+.tax-card--pre .stat-row__label  { color: var(--text-muted); }
+.tax-card--pre .stat-row__val    { color: var(--text); }
+
+/* ─── After-Harvest Card (gradient blue) ─────────────────────────────────── */
+.tax-card--after {
+  background: linear-gradient(145deg, #1a3cc8 0%, #2563eb 55%, #3b82f6 100%);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.tax-card--after::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 180px; height: 180px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.tax-card--after::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: -30px;
+  width: 120px; height: 120px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Headers & labels for after-card */
+.tax-card--after .stat-header__col { color: rgba(255,255,255,0.7); }
+.tax-card--after .stat-row__label  { color: rgba(255,255,255,0.8); }
+.tax-card--after .stat-row__val    { color: #fff; }
+.tax-card--after .tax-card__divider { border-color: rgba(255,255,255,0.2); }
+
+/* ─── Card title ──────────────────────────────────────────────────────────── */
+.tax-card__title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.after-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Column Headers ──────────────────────────────────────────────────────── */
+.stat-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.stat-header__col {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: right;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ─── Stat Row ────────────────────────────────────────────────────────────── */
+.stat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  padding: 7px 0;
+  transition: background 0.15s;
+  border-radius: 6px;
+}
+.stat-row--total .stat-row__label { font-weight: 700; }
+.stat-row--total .stat-row__val   { font-weight: 700; }
+
+.stat-row__label {
+  font-size: 13.5px;
+}
+.stat-row__val {
+  font-size: 13.5px;
+  text-align: right;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: all 0.25s ease;
+}
+
+/* ─── Colour helpers ──────────────────────────────────────────────────────── */
+.val-gain  { color: var(--green); }
+.val-loss  { color: var(--red); }
+.val-gain-after  { color: #86efac; }
+.val-loss-after  { color: #fca5a5; }
+
+/* ─── Divider ─────────────────────────────────────────────────────────────── */
+.tax-card__divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 10px 0;
+}
+
+/* ─── Realised (pre) ──────────────────────────────────────────────────────── */
+.tax-card__realised {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+}
+.tax-card__realised-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+.tax-card__realised-value {
+  font-size: 24px;
+  font-weight: 800;
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--text);
+  letter-spacing: -0.5px;
+}
+
+/* ─── Effective (after) ───────────────────────────────────────────────────── */
+.tax-card__effective {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+.tax-card__effective-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+.tax-card__effective-value {
+  font-size: 26px;
+  font-weight: 800;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #fff;
+  letter-spacing: -0.5px;
+  transition: all 0.3s ease;
+}
+
+/* ─── Savings Badge ───────────────────────────────────────────────────────── */
+.savings-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  color: #fff;
+  margin-top: 6px;
+  animation: pop-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.savings-badge strong { font-weight: 800; }
+.savings-badge__emoji { font-size: 18px; }
+.savings-badge--empty { background: rgba(255,255,255,0.08); }
+.savings-badge__hint  { font-size: 12.5px; color: rgba(255,255,255,0.7); }
+
+.tax-card__error {
+  font-size: 13px;
+  color: var(--red);
+  padding: 12px 0;
+}
